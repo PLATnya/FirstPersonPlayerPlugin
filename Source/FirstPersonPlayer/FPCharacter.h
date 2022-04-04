@@ -16,13 +16,9 @@ public:
 	AFPCharacter();
 
 protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
+	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 
-public:
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
-
-	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+private:
+	virtual void OnForwardMove(float _AxisValue);
+	virtual void OnRightMove(float _AxisValue);
 };

@@ -26,8 +26,10 @@ public:
 	virtual void GetOwnedGameplayTags(FGameplayTagContainer& TagContainer) const override;
 	
 	void AddOwnedTag(const FGameplayTag& _Tag);
+	void AddOwnedTags(const FGameplayTagContainer& _Tags);
+	
 	void RemoveOwnedTag(const FGameplayTag& _Tag);
-
+	void RemoveOwnedTags(const FGameplayTagContainer& _Tags);
 private:
 	
 	FGameplayTagContainer OwnedTags;

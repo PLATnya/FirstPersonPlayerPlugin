@@ -3,23 +3,33 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "GameplayTagAssetInterface.h"
 #include "GameFramework/Actor.h"
 #include "FPPlayerState.generated.h"
 
+struct FGameplayTag;
+
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFPOnOwnedTagsChangedDelegate, FGameplayTag, Tag);
+
 UCLASS()
-class FIRSTPERSONPLAYER_API AFPPlayerState : public AActor
+class FIRSTPERSONPLAYER_API AFPPlayerState : public AActor, public IGameplayTagAssetInterface
 {
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this actor's properties
-	AFPPlayerState();
 
-protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
+	FFPOnOwnedTagsChangedDelegate OnOwnedTagAdd;
+	FFPOnOwnedTagsChangedDelegate OnOwnedTagRemove;
 
-public:
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
+
+	virtual void GetOwnedGameplayTags(FGameplayTagContainer& TagContainer) const override;
+	
+	void AddOwnedTag(const FGameplayTag& _Tag);
+	void RemoveOwnedTag(const FGameplayTag& _Tag);
+
+private:
+	
+	FGameplayTagContainer OwnedTags;
+	
 };

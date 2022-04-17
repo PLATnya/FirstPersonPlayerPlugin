@@ -4,23 +4,21 @@
 #include "FPPlayerState.h"
 
 
-// Sets default values
-AFPPlayerState::AFPPlayerState()
+//
+void AFPPlayerState::GetOwnedGameplayTags(FGameplayTagContainer& TagContainer) const
 {
-	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+	TagContainer.AppendTags(OwnedTags);
 }
 
-// Called when the game starts or when spawned
-void AFPPlayerState::BeginPlay()
+
+void AFPPlayerState::AddOwnedTag(const FGameplayTag& _Tag)
 {
-	Super::BeginPlay();
-	
+	OwnedTags.AddTag(_Tag);
+	OnOwnedTagAdd.Broadcast(_Tag);
 }
 
-// Called every frame
-void AFPPlayerState::Tick(float DeltaTime)
+void AFPPlayerState::RemoveOwnedTag(const FGameplayTag& _Tag)
 {
-	Super::Tick(DeltaTime);
+	OwnedTags.RemoveTag(_Tag);
+	OnOwnedTagRemove.Broadcast(_Tag);
 }
-

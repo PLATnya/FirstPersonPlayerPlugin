@@ -28,11 +28,13 @@ public:
 	UPrimitiveComponent* GetGrabbedPrimitiveComp() const { return pPrimitiveGrabbedObstacle; }
 	EFPClimbingState GetCurrentClimbingState() const { return CurrentState; }
 
+	bool TryGrab();
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
 private:
+	class AFPCharacter* GetOwnedCharacter() const;
 
 	EFPClimbingState CurrentState = EFPClimbingState::None;
 

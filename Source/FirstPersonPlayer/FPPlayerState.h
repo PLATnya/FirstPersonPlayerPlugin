@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameplayTagAssetInterface.h"
 #include "GameFramework/Actor.h"
+#include "GameFramework/PlayerState.h"
 #include "FPPlayerState.generated.h"
 
 struct FGameplayTag;
@@ -13,7 +14,7 @@ struct FGameplayTag;
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFPOnOwnedTagsChangedDelegate, FGameplayTag, Tag);
 
 UCLASS()
-class FIRSTPERSONPLAYER_API AFPPlayerState : public AActor, public IGameplayTagAssetInterface
+class FIRSTPERSONPLAYER_API AFPPlayerState : public APlayerState, public IGameplayTagAssetInterface
 {
 	GENERATED_BODY()
 

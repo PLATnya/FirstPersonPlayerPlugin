@@ -22,7 +22,6 @@ void AFPCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 	PlayerInputComponent->BindAxis("MoveForward/Backwards", this, &AFPCharacter::OnForwardMove);
 	PlayerInputComponent->BindAxis("MoveRight/Left", this, &AFPCharacter::OnRightMove);
 
-	PlayerInputComponent->BindAction("JumpAction", EInputEvent::IE_Pressed, this, &ACharacter::Jump);
 }
 
 void AFPCharacter::OnForwardMove(float _AxisValue)

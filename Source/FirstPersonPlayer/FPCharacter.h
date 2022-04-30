@@ -22,7 +22,7 @@ protected:
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 
 
-private:
+
 	virtual void OnForwardMove(float _AxisValue);
 	virtual void OnRightMove(float _AxisValue);
 

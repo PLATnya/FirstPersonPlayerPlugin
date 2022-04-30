@@ -15,9 +15,9 @@ class FIRSTPERSONPLAYER_API AFPCharacter : public ACharacter
 	GENERATED_BODY()
 
 public:
-	
-	// Sets default values for this character's properties
-	AFPCharacter();
+
+	//AFPCharacter( const FObjectInitializer& _ObjectInitializer);
+
 protected:
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 

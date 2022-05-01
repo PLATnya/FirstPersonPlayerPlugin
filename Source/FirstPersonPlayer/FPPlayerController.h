@@ -15,4 +15,8 @@ public:
 	// Sets default values for this actor's properties
 	AFPPlayerController();
 
+	virtual void SetupInputComponent() override;
+
+	virtual void OnTurnUp(float _AxisValue);
+	virtual void OnTurnRight(float _AxisValue);
 };

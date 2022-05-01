@@ -3,17 +3,13 @@
 
 #include "FPCharacter.h"
 
-#include "Components/FPCharacterMovementComponent.h"
+#include "Components/FPAdvancedMovementComponent.h"
 
-/*AFPCharacter::AFPCharacter(const FObjectInitializer& _ObjectInitializer)
-	:Super(_ObjectInitializer.SetDefaultSubobjectClass<UFPCharacterMovementComponent>(CharacterMovementComponentName))
+
+AFPCharacter::AFPCharacter()
 {
-	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
-
-
-}*/
-
+	AdvancedMovementComponent = CreateDefaultSubobject<UFPAdvancedMovementComponent>("Advanced Movement");
+}
 
 void AFPCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {

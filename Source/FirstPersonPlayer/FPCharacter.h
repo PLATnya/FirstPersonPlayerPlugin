@@ -7,7 +7,7 @@
 #include "GameFramework/Character.h"
 #include "FPCharacter.generated.h"
 
-
+class UFPAdvancedMovementComponent;
 
 UCLASS()
 class FIRSTPERSONPLAYER_API AFPCharacter : public ACharacter
@@ -16,12 +16,16 @@ class FIRSTPERSONPLAYER_API AFPCharacter : public ACharacter
 
 public:
 
-	//AFPCharacter( const FObjectInitializer& _ObjectInitializer);
+	AFPCharacter();
+
+	UFPAdvancedMovementComponent* GetAdvancedMovement() { return AdvancedMovementComponent; }
 
 protected:
+
+	UPROPERTY(Category=Character, VisibleAnywhere, BlueprintReadOnly, meta=(AllowPrivateAccess = "true"))
+	UFPAdvancedMovementComponent* AdvancedMovementComponent;
+
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
-
-
 
 	virtual void OnForwardMove(float _AxisValue);
 	virtual void OnRightMove(float _AxisValue);

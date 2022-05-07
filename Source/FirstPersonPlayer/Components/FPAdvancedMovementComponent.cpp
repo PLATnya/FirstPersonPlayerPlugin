@@ -8,8 +8,8 @@
 UFPAdvancedMovementComponent::UFPAdvancedMovementComponent(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
-	PrimaryComponentTick.TickGroup = TG_PrePhysics;
-	PrimaryComponentTick.bCanEverTick = true;
+	//PimaryComponentTick.TickGroup = TG_PrePhysics;
+	//PrimaryComponentTick.bCanEverTick = true;
 }
 
 

@@ -25,19 +25,29 @@ public:
 	// Sets default values for this component's properties
 	UFPClimbingComponent();
 
-	UPrimitiveComponent* GetGrabbedPrimitiveComp() const { return pPrimitiveGrabbedObstacle; }
 	EFPClimbingState GetCurrentClimbingState() const { return CurrentState; }
+	UFUNCTION(BlueprintCallable)
+	bool TryClimb(UPrimitiveComponent* ClimbingComponent);
 
-	bool TryGrab();
+	void ClimbHorizontal(float AxisFactor);
+	void ClimbVertical(float AxisFactor);
+		
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
-
+	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 private:
+	void ClimbInDirection(FVector Direction);
+	FVector GetClimbingPoint(UPrimitiveComponent* ClimbingOnComponent, const FVector& Location, const FVector& LocationNormal) const;
+	UFUNCTION(BlueprintCallable)
+	FVector GetPointOnEdge(UPrimitiveComponent* ClimbingOnComponent, const FVector Location) const;
 	class AFPCharacter* GetOwnedCharacter() const;
 
 	EFPClimbingState CurrentState = EFPClimbingState::None;
 
+	bool bIsClimbing = false;
+	FVector ClimbingPoint = FVector::ZeroVector;
+	
 	UPROPERTY()
-	UPrimitiveComponent* pPrimitiveGrabbedObstacle = nullptr;
+	UPrimitiveComponent* LastClimbComponent = nullptr;
 };

@@ -7,6 +7,7 @@
 #include "GameFramework/Character.h"
 #include "FPCharacter.generated.h"
 
+class UFPClimbingComponent;
 class UFPAdvancedMovementComponent;
 
 UCLASS()
@@ -24,6 +25,9 @@ protected:
 
 	UPROPERTY(Category=Character, VisibleAnywhere, BlueprintReadOnly, meta=(AllowPrivateAccess = "true"))
 	UFPAdvancedMovementComponent* AdvancedMovementComponent;
+
+	UPROPERTY(Category=Character, VisibleAnywhere, BlueprintReadOnly, meta=(AllowPrivateAccess = "true"))
+	UFPClimbingComponent* ClimbingComponent;
 
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 

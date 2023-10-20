@@ -10,7 +10,12 @@
 AFPCharacter::AFPCharacter()
 {
 	AdvancedMovementComponent = CreateDefaultSubobject<UFPAdvancedMovementComponent>("Advanced Movement");
-	ClimbingComponent = CreateDefaultSubobject<UFPClimbingComponent>("Climbing Component");
+	//ClimbingComponent = CreateDefaultSubobject<UFPClimbingComponent>("Climbing Component");
+}
+
+UFPClimbingComponent* AFPCharacter::GetClimbingComponent_Implementation()
+{
+	return nullptr;
 }
 
 void AFPCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -25,11 +30,19 @@ void AFPCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 void AFPCharacter::OnForwardMove(float _AxisValue)
 {
 	AddMovementInput(GetActorForwardVector() * _AxisValue);
-	ClimbingComponent->ClimbVertical(_AxisValue);
+	UFPClimbingComponent* ClimbingComponent = GetClimbingComponent();
+	if (IsValid(ClimbingComponent))
+	{
+		ClimbingComponent->ClimbVertical(_AxisValue);	
+	}
 }
 
 void AFPCharacter::OnRightMove(float _AxisValue)
 {
 	AddMovementInput(GetActorRightVector() * _AxisValue);
-	ClimbingComponent->ClimbHorizontal(_AxisValue);
+	UFPClimbingComponent* ClimbingComponent = GetClimbingComponent();
+	if (IsValid(ClimbingComponent))
+	{
+		ClimbingComponent->ClimbHorizontal(_AxisValue);	
+	}
 }

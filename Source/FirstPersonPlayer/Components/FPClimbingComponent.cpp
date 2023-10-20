@@ -21,6 +21,11 @@ UFPClimbingComponent::UFPClimbingComponent()
 
 bool UFPClimbingComponent::TryClimb(UPrimitiveComponent* ClimbingComponent)
 {
+	if (!IsClimbable(ClimbingComponent))
+	{
+		return false;
+	}
+	
 	AFPCharacter* OwnerCharacter = GetOwnedCharacter();
 	if(!ensure(IsValid(OwnerCharacter))){ return false; }
 
@@ -56,6 +61,11 @@ bool UFPClimbingComponent::TryClimb(UPrimitiveComponent* ClimbingComponent)
 	}
 
 	return false;
+}
+
+bool UFPClimbingComponent::IsClimbable_Implementation(UPrimitiveComponent* ClimbingComponent) const
+{
+	return true;
 }
 
 void UFPClimbingComponent::ClimbHorizontal(float AxisFactor)
@@ -141,13 +151,17 @@ void UFPClimbingComponent::ClimbInDirection(FVector Direction)
 		if (Hit.Component == LastClimbComponent)
 		{
 			SameHit = Hit;
-			
 			bIsSameClimbHit = true;
 		}
 		else
 		{
-			ClimbableComponents.Add(Hit.GetComponent());
-			bIsAnotherClimbHit = true;
+			UPrimitiveComponent* ClimbCandidateComponent = Hit.GetComponent();
+			//if (IsClimbable(ClimbCandidateComponent))
+			if (IsClimbable(ClimbCandidateComponent))
+			{
+				ClimbableComponents.Add(ClimbCandidateComponent);
+				bIsAnotherClimbHit = true;
+			}
 		}
 	}
 

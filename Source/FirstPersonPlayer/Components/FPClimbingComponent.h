@@ -16,7 +16,7 @@ enum class EFPClimbingState : uint8
 	GrabbingUp
 };
 
-UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
+UCLASS(Blueprintable, BlueprintType, ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
 class FIRSTPERSONPLAYER_API UFPClimbingComponent : public UActorComponent
 {
 	GENERATED_BODY()
@@ -29,9 +29,12 @@ public:
 	UFUNCTION(BlueprintCallable)
 	bool TryClimb(UPrimitiveComponent* ClimbingComponent);
 
+	UFUNCTION(BlueprintNativeEvent)
+	bool IsClimbable(UPrimitiveComponent* ClimbingComponent) const;	
+	
 	void ClimbHorizontal(float AxisFactor);
 	void ClimbVertical(float AxisFactor);
-		
+	
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;

@@ -21,13 +21,16 @@ public:
 
 	UFPAdvancedMovementComponent* GetAdvancedMovement() { return AdvancedMovementComponent; }
 
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	UFPClimbingComponent* GetClimbingComponent();
 protected:
 
 	UPROPERTY(Category=Character, VisibleAnywhere, BlueprintReadOnly, meta=(AllowPrivateAccess = "true"))
 	UFPAdvancedMovementComponent* AdvancedMovementComponent;
 
-	UPROPERTY(Category=Character, VisibleAnywhere, BlueprintReadOnly, meta=(AllowPrivateAccess = "true"))
-	UFPClimbingComponent* ClimbingComponent;
+	
+	/*UPROPERTY(Category=Character, VisibleAnywhere, BlueprintReadOnly, meta=(AllowPrivateAccess = "true"))
+	UFPClimbingComponent* ClimbingComponent;*/
 
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 

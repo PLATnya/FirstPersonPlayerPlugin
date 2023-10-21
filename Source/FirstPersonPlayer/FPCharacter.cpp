@@ -5,15 +5,20 @@
 
 #include "Components/FPAdvancedMovementComponent.h"
 #include "Components/FPClimbingComponent.h"
+#include "Components/FPLadderMovementComponent.h"
 
 
 AFPCharacter::AFPCharacter()
 {
 	AdvancedMovementComponent = CreateDefaultSubobject<UFPAdvancedMovementComponent>("Advanced Movement");
-	//ClimbingComponent = CreateDefaultSubobject<UFPClimbingComponent>("Climbing Component");
 }
 
 UFPClimbingComponent* AFPCharacter::GetClimbingComponent_Implementation()
+{
+	return nullptr;
+}
+
+UFPLadderMovementComponent* AFPCharacter::GetLadderMoveComponent_Implementation()
 {
 	return nullptr;
 }
@@ -34,6 +39,12 @@ void AFPCharacter::OnForwardMove(float _AxisValue)
 	if (IsValid(ClimbingComponent))
 	{
 		ClimbingComponent->ClimbVertical(_AxisValue);	
+	}
+
+	UFPLadderMovementComponent* LadderMovementComponent = GetLadderMoveComponent();
+	if (IsValid(LadderMovementComponent))
+	{
+		LadderMovementComponent->ClimbVertical(_AxisValue);
 	}
 }
 

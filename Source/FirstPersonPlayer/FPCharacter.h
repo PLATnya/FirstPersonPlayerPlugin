@@ -7,6 +7,7 @@
 #include "GameFramework/Character.h"
 #include "FPCharacter.generated.h"
 
+class UFPLadderMovementComponent;
 class UFPClimbingComponent;
 class UFPAdvancedMovementComponent;
 
@@ -23,6 +24,9 @@ public:
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	UFPClimbingComponent* GetClimbingComponent();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	UFPLadderMovementComponent* GetLadderMoveComponent();
 protected:
 
 	UPROPERTY(Category=Character, VisibleAnywhere, BlueprintReadOnly, meta=(AllowPrivateAccess = "true"))

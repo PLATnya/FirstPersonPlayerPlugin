@@ -118,7 +118,7 @@ void UFPClimbingComponent::ClimbInDirection(FVector Direction)
 
 	const UCapsuleComponent* OwnerCharacterCapsule = OwnerCharacter->GetCapsuleComponent();
 
-	TArray<FHitResult> OutHits;
+	
 	const FVector ClimbingDirectionStart = OwnerCharacter->GetActorLocation();
 	const FVector ClimbingDirectionEnd = OwnerCharacter->GetActorLocation() + Direction.GetSafeNormal() * 100;
 	const float CharacterCapsuleRadius = OwnerCharacterCapsule->GetScaledCapsuleRadius();
@@ -127,7 +127,7 @@ void UFPClimbingComponent::ClimbInDirection(FVector Direction)
 	float TraceCapsuleHeight = CharacterCapsuleHalfHeight / 2;
 	//DrawDebugCapsule(GetWorld(),  ClimbingDirectionEnd, TraceCapsuleHeight, CharacterCapsuleRadius,
 	//	FQuat::Identity,FColor::Blue, true);
-	
+	TArray<FHitResult> OutHits;
 	if (!UKismetSystemLibrary::CapsuleTraceMulti(OwnerCharacter, ClimbingDirectionStart, ClimbingDirectionEnd,
 		CharacterCapsuleRadius, TraceCapsuleHeight,
 		UEngineTypes::ConvertToTraceType(ECC_WorldStatic), false, {},

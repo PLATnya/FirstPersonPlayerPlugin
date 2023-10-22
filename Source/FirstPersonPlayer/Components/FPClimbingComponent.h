@@ -34,7 +34,8 @@ public:
 	
 	void ClimbHorizontal(float AxisFactor);
 	void ClimbVertical(float AxisFactor);
-	
+
+	void JumpFromClimb();
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
@@ -53,4 +54,7 @@ private:
 	
 	UPROPERTY()
 	UPrimitiveComponent* LastClimbComponent = nullptr;
+
+	UPROPERTY(EditAnywhere)
+	float ClimbOffJumpForce = 100000;
 };

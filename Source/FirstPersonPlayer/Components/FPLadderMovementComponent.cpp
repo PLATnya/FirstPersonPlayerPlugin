@@ -6,6 +6,7 @@
 #include "Components/CapsuleComponent.h"
 #include "FirstPersonPlayer/FPCharacter.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetSystemLibrary.h"
 
 // Sets default values for this component's properties
@@ -16,6 +17,23 @@ UFPLadderMovementComponent::UFPLadderMovementComponent()
 	PrimaryComponentTick.bCanEverTick = true;
 
 	// ...
+}
+
+void UFPLadderMovementComponent::JumpFromClimb()
+{
+	if (!bOnLadder )
+	{
+		return;
+	}
+	bOnLadder = false;
+	GetOwnedCharacter()->GetCharacterMovement()->SetMovementMode(MOVE_Falling);
+	GetOwnedCharacter()->SetActorEnableCollision(true);
+	GetOwnedCharacter()->GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+	//GetOwnedCharacter()->Jump();
+
+	const FVector PlayerForwardVector = UGameplayStatics::GetPlayerCameraManager(GetWorld(), 0)->GetCameraRotation().Vector();
+	GetOwnedCharacter()->GetCharacterMovement()->AddImpulse(PlayerForwardVector * LadderOffJumpForce);
+
 }
 
 bool UFPLadderMovementComponent::TryClimb(UPrimitiveComponent* LadderComponent)
@@ -119,4 +137,5 @@ void UFPLadderMovementComponent::TickComponent(float DeltaTime, ELevelTick TickT
 		GetOwnedCharacter()->GetCharacterMovement()->MoveSmooth(MoveDirection * 200.0f, DeltaTime);
 	}
 }
+
 

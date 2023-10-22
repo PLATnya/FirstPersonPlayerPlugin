@@ -90,6 +90,24 @@ void UFPClimbingComponent::ClimbVertical(float AxisFactor)
 	ClimbInDirection(PlayerForwardVector *  AxisFactor);
 }
 
+void UFPClimbingComponent::JumpFromClimb()
+{
+	if (!bIsClimbing )
+	{
+		return;
+	}
+	bIsClimbing = false;
+	GetOwnedCharacter()->GetCharacterMovement()->SetMovementMode(MOVE_Falling);
+	GetOwnedCharacter()->SetActorEnableCollision(true);
+	GetOwnedCharacter()->GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+	//GetOwnedCharacter()->Jump();
+
+	const FVector PlayerForwardVector = UGameplayStatics::GetPlayerCameraManager(GetWorld(), 0)->GetCameraRotation().Vector();
+	GetOwnedCharacter()->GetCharacterMovement()->AddImpulse(PlayerForwardVector * ClimbOffJumpForce);
+
+}
+
+
 // Called when the game starts
 void UFPClimbingComponent::BeginPlay()
 {

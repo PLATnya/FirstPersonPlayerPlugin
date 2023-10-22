@@ -29,7 +29,7 @@ void AFPCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 
 	PlayerInputComponent->BindAxis("MoveForward/Backwards", this, &AFPCharacter::OnForwardMove);
 	PlayerInputComponent->BindAxis("MoveRight/Left", this, &AFPCharacter::OnRightMove);
-	
+	PlayerInputComponent->BindAction("JumpAction", IE_Pressed, this, &AFPCharacter::OnJumpPressed);
 }
 
 void AFPCharacter::OnForwardMove(float _AxisValue)
@@ -56,4 +56,11 @@ void AFPCharacter::OnRightMove(float _AxisValue)
 	{
 		ClimbingComponent->ClimbHorizontal(_AxisValue);	
 	}
+}
+
+void AFPCharacter::OnJumpPressed()
+{
+ 	GetClimbingComponent()->JumpFromClimb();
+	GetLadderMoveComponent()->JumpFromClimb();
+	Jump();
 }

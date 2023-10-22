@@ -20,7 +20,7 @@ public:
 
 	void ClimbVertical(float AxisFactor);
 	class AFPCharacter* GetOwnedCharacter() const;
-
+	void JumpFromClimb();
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 private:
 	FVector LadderOnLocation = FVector::ZeroVector;
@@ -28,4 +28,7 @@ private:
 
 	UPROPERTY()
 	UPrimitiveComponent* CurrentLadder = nullptr;
+
+	UPROPERTY(EditAnywhere)
+	float LadderOffJumpForce = 100000;
 };
